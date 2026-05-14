@@ -1,35 +1,48 @@
 <?php
 session_start();
-require 'conexion.php';
+// Recomienda llamar al archivo de conexión con require_once
+require_once("conexion.php");
 
 $mensaje = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cedula = trim($_POST['cedula']);
-    $nombre = trim($_POST['nombre']);
-    $correo = trim($_POST['correo']);
-    $password = $_POST['password'];
+    
+    // 1. SANITIZACIÓN Y VALIDACIÓN DE ENTRADAS
+    $cedula = htmlspecialchars(trim($_POST['cedula']));
+    $nombre = htmlspecialchars(trim($_POST['nombre']));
+    // filter_var limpia el correo de caracteres no válidos
+    $correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
+    $clave_plana = $_POST['password']; // Contraseña recibida del formulario
 
-    if (!empty($cedula) && !empty($nombre) && !empty($correo) && !empty($password)) {
-        // Validar si el correo ya existe
-        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE correo = ?");
-        $stmt->execute([$correo]);
+    if (!empty($cedula) && !empty($nombre) && !empty($correo) && !empty($clave_plana)) {
         
-        if ($stmt->rowCount() > 0) {
-            $mensaje = "<div class='alert alert-danger'>El correo ya está registrado en el sistema ISP.</div>";
+        // Verificar si el correo o la cédula ya existen en el sistema
+        $verificar = $conexion->prepare("SELECT id FROM usuarios WHERE correo = ? OR cedula = ?");
+        $verificar->bind_param("ss", $correo, $cedula);
+        $verificar->execute();
+        $verificar->store_result();
+        
+        if ($verificar->num_rows > 0) {
+            // Escapar el mensaje de error por precaución
+            $mensaje = "<div class='alert alert-danger'>" . htmlspecialchars("El correo o la cédula ya están registrados en el sistema.", ENT_QUOTES, 'UTF-8') . "</div>";
         } else {
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO usuarios (cedula, nombre, correo, password) VALUES (?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
+            // 2. HASHEO DE LA CONTRASEÑA (CRUCIAL)
+            $clave_hashed = password_hash($clave_plana, PASSWORD_DEFAULT);
             
-            if ($stmt->execute([$cedula, $nombre, $correo, $passwordHash])) {
-                $mensaje = "<div class='alert alert-success'>Registro exitoso. <a href='index.php'>Iniciar sesión</a></div>";
+            // Inserción del nuevo usuario con la clave hasheada
+            $stmt = $conexion->prepare("INSERT INTO usuarios (cedula, nombre, correo, password) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $cedula, $nombre, $correo, $clave_hashed);
+            
+            if ($stmt->execute()) {
+                $mensaje = "<div class='alert alert-success'>" . htmlspecialchars("Registro exitoso.", ENT_QUOTES, 'UTF-8') . " <a href='index.php'>Inicia sesión aquí</a></div>";
             } else {
-                $mensaje = "<div class='alert alert-danger'>Error al registrar.</div>";
+                $mensaje = "<div class='alert alert-danger'>" . htmlspecialchars("Error al registrar el usuario.", ENT_QUOTES, 'UTF-8') . "</div>";
             }
+            $stmt->close();
         }
+        $verificar->close();
     } else {
-        $mensaje = "<div class='alert alert-warning'>Todos los campos son obligatorios.</div>";
+        $mensaje = "<div class='alert alert-warning'>Llena todos los campos obligatorios.</div>";
     }
 }
 ?>
@@ -38,40 +51,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de nuevo cliente</title>
+    <title>Registro - Empresa ISP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>Registro de cliente </h4>
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h5 class="mb-0">Registro de Nuevo Cliente</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-4">
                     <?= $mensaje ?>
                     <form method="POST" action="">
                         <div class="mb-3">
-                            <label>Cédula</label>
+                            <label class="form-label">Cédula</label>
                             <input type="text" name="cedula" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label>Nombre Completo</label>
+                            <label class="form-label">Nombre Completo</label>
                             <input type="text" name="nombre" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label>Correo Electrónico</label>
+                            <label class="form-label">Correo Electrónico</label>
                             <input type="email" name="correo" class="form-control" required>
                         </div>
-                        <div class="mb-3">
-                            <label>Contraseña</label>
+                        <div class="mb-4">
+                            <label class="form-label">Contraseña</label>
                             <input type="password" name="password" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                        <button type="submit" class="btn btn-success w-100">Crear Cuenta</button>
                     </form>
                     <div class="mt-3 text-center">
-                        <a href="index.php">¿Ya tienes cuenta? Inicia sesión</a>
+                        <a href="index.php" class="text-decoration-none">¿Ya tienes cuenta? Ingresa aquí</a>
                     </div>
                 </div>
             </div>

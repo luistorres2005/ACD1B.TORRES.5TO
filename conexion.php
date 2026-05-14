@@ -1,13 +1,15 @@
 <?php
-$host = 'localhost';
-$dbname = 'isp_portal_db';
-$username = 'root'; // Cambia si tienes otro usuario
-$password = '';     // Cambia si tienes contraseña
+// Variables de configuración de la base de datos
+$servidor = "localhost";
+$usuario = "root";
+$contrasena = "";
+$basedatos = "ACD1B_TORRES";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+// Crear conexión con MySQLi
+$conexion = new mysqli($servidor, $usuario, $contrasena, $basedatos);
+
+// Verificar si existe error de conexión
+if ($conexion->connect_error) {
+    die("Error de conexión a la base de datos.");
 }
 ?>
