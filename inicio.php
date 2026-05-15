@@ -41,6 +41,7 @@ if (!isset($_SESSION['usuario_id'])) {
                     <h4 class="card-title text-primary">Plan Hogar</h4>
                     <h2 class="fw-bold">100 Mbps</h2>
                     <p class="card-text">Ideal para streaming, redes sociales y navegación fluida para toda la familia.</p>
+                    <img src="img/internet.png"alt="internet" width="259">                
                 </div>
             </div>
         </div>
@@ -50,6 +51,7 @@ if (!isset($_SESSION['usuario_id'])) {
                     <h4 class="card-title text-primary">Plan Gamer</h4>
                     <h2 class="fw-bold">300 Mbps</h2>
                     <p class="card-text">Ping ultra bajo, juegos online sin lag y descargas rápidas para usuarios exigentes.</p>
+                    <img src="img/gamer.webp"alt="internet" width="150">
                 </div>
             </div>
         </div>
@@ -69,7 +71,7 @@ if (!isset($_SESSION['usuario_id'])) {
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title text-info">Nuestra Visión</h5>
-                    <p class="card-text text-justify">Ser la empresa proveedora de internet (ISP) líder en la región, reconocida por nuestra innovación tecnológica, la expansión de nuestra red de fibra óptica y el compromiso inquebrantable con la satisfacción de nuestros clientes.</p>
+                    <p class="card-text text-justify">Ser la empresa proveedora de internet líder en la región, reconocida por nuestra innovación tecnológica, la expansión de nuestra red de fibra óptica y el compromiso inquebrantable con la satisfacción de nuestros clientes.</p>
                 </div>
             </div>
         </div>

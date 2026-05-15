@@ -82,7 +82,7 @@ $stmt->close();
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="inicio.php">Empresa ISP</a>
+        <a class="navbar-brand" href="inicio.php">FG OptiNet</a>
         <div class="d-flex">
             <a href="inicio.php" class="btn btn-outline-light me-2">Volver al Inicio</a>
             <a href="logout.php" class="btn btn-danger">Cerrar Sesión</a>
