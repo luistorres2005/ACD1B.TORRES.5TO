@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <title>Inicio - FG OptiNet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -77,6 +77,11 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
     </div>
 </div>
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            <small>&copy;2026 - yltorres3 - Torres Cabezas Yober Luis</small>
+        </div>
+    </footer>
 
 </body>
 </html>
