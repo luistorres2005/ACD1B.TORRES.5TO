@@ -1,12 +1,12 @@
 # Portal de Clientes ISP - FG OptiNet
 
-**Autor:** Yober Luis Torres Cabezas
+**Estudiante:** Yober Luis Torres Cabezas
 
 ## Descripción del Proyecto
-Sistema web desarrollado con HTML, PHP y MySQL para la gestión de clientes de un Proveedor de Servicios de Internet (ISP). El proyecto implementa un flujo completo de autenticación de usuarios (registro, login, logout) y un panel de administración de perfil ("Mi Cuenta"), priorizando prácticas de seguridad y un diseño responsivo.
+Sistema web desarrollado con HTML, PHP y MySQL para la gestión de clientes de un Proveedor de Servicios de Internet. El proyecto implementa un flujo completo de autenticación de usuarios (registro, login, logout) y un panel de administración de perfil ("Mi Cuenta"), priorizando prácticas de seguridad y un diseño responsivo.
 
 ## Tecnologías Utilizadas
-* **Backend:** PHP (Motor MySQLi Orientado a Objetos).
+* **Backend:** PHP.
 * **Base de Datos:** MySQL.
 * **Frontend:** HTML5 y Bootstrap 5.
 
@@ -32,6 +32,9 @@ Este proyecto cumple estrictamente con las normativas de seguridad web para la g
 
 ## Instrucciones de Instalación (Local)
 1. Iniciar los módulos de Apache y MySQL en el panel de control de XAMPP.
-2. Copiar la carpeta del proyecto dentro del directorio `C:\xampp\htdocs\`.
-3. Abrir phpMyAdmin (`http://localhost/phpmyadmin/`), seleccionar la pestaña SQL y ejecutar el código del archivo `database.sql`.
-4. Acceder al proyecto desde el navegador web ingresando a: `http://localhost/ACD1B.TORRES/index.php`
+2. Descargar los archivos.
+3. Crear una carpeta llamada ACD1B.TORRES e ingresar los archivos en la carpeta.
+4. Copiar la carpeta del proyecto dentro del directorio `C:\xampp\htdocs\`.
+5. Abrir phpMyAdmin (`http://localhost/phpmyadmin/`), seleccionar la pestaña SQL y ejecutar el código del archivo `database.sql`.
+6. Acceder al proyecto desde el navegador web ingresando a: `http://localhost/ACD1B.TORRES/index.php`
+7. Credenciales de usuario ya creado: luistorres.20199@gmail.com - Lobeluis2025@
