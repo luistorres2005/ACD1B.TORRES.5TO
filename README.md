@@ -3,7 +3,7 @@
 **Autor:** Yober Luis Torres Cabezas
 
 ## Descripción del Proyecto
-Sistema web desarrollado en PHP y MySQL para la gestión de clientes de un Proveedor de Servicios de Internet (ISP). El proyecto implementa un flujo completo de autenticación de usuarios (registro, login, logout) y un panel de administración de perfil ("Mi Cuenta"), priorizando prácticas modernas de seguridad backend y un diseño responsivo.
+Sistema web desarrollado con HTML, PHP y MySQL para la gestión de clientes de un Proveedor de Servicios de Internet (ISP). El proyecto implementa un flujo completo de autenticación de usuarios (registro, login, logout) y un panel de administración de perfil ("Mi Cuenta"), priorizando prácticas de seguridad y un diseño responsivo.
 
 ## Tecnologías Utilizadas
 * **Backend:** PHP (Motor MySQLi Orientado a Objetos).
